@@ -22,7 +22,7 @@ func main() {
 
 	loadEnv()
 	cfg := config.LoadConfig()
-	diContainer := container.NewContainer(cfg, ctx, &wg)
+	diContainer := container.NewContainer(cfg, &wg)
 
 	srv := newHTTPServer(cfg, diContainer)
 	runServer(srv)

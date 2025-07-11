@@ -1,7 +1,7 @@
 package config
 
 import (
-	"log"
+	"github.com/sirupsen/logrus"
 	"os"
 )
 
@@ -29,27 +29,27 @@ func LoadConfig() *Config {
 
 	dbHost := os.Getenv("DB_HOST")
 	if dbHost == "" {
-		log.Fatalf("DB_HOST environment variable is not set")
+		logrus.Fatalf("DB_HOST environment variable is not set")
 	}
 
 	dbPort := os.Getenv("DB_PORT")
 	if dbPort == "" {
-		log.Fatalf("DB_PORT environment variable is not set")
+		logrus.Fatalf("DB_PORT environment variable is not set")
 	}
 
 	dbName := os.Getenv("DB_NAME")
 	if dbName == "" {
-		log.Fatalf("DB_NAME environment variable is not set")
+		logrus.Fatalf("DB_NAME environment variable is not set")
 	}
 
 	dbUser := os.Getenv("DB_USER")
 	if dbUser == "" {
-		log.Fatalf("DB_USER environment variable is not set")
+		logrus.Fatalf("DB_USER environment variable is not set")
 	}
 
 	dbPassword := os.Getenv("DB_PASSWORD")
 	if dbPassword == "" {
-		log.Fatalf("DB_PASSWORD environment variable is not set")
+		logrus.Fatalf("DB_PASSWORD environment variable is not set")
 	}
 
 	dbSsl := os.Getenv("DB_SSL")

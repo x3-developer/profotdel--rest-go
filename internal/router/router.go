@@ -5,17 +5,19 @@ import (
 	"net/http"
 	"profotdel-rest/config"
 	"profotdel-rest/internal/container"
+	"profotdel-rest/internal/middleware"
+	"profotdel-rest/internal/modules/category/v1/delivery"
 )
 
 func NewRouter(cfg *config.Config, container *container.Container) *chi.Mux {
 	r := chi.NewRouter()
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		_, err := w.Write([]byte("Welcome to the Profotdel API!"))
-		if err != nil {
-			return
-		}
-	})
+	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
+
+	delivery.CategoryV1Routes(r, container)
+
+	r.Handle("/public/*", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
 
 	return r
 }
