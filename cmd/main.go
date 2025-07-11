@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"github.com/joho/godotenv"
-	"log"
+	"github.com/sirupsen/logrus"
 	"net/http"
 	"os/signal"
 	"profotdel-rest/config"
@@ -33,7 +33,7 @@ func main() {
 
 func loadEnv() {
 	if err := godotenv.Load(".env"); err != nil {
-		log.Fatal("error loading .env file")
+		logrus.Fatal("error loading .env file")
 	}
 }
 
@@ -48,24 +48,24 @@ func newHTTPServer(cfg *config.Config, diContainer *container.Container) *http.S
 
 func runServer(srv *http.Server) {
 	go func() {
-		log.Printf("starting server on :%s", srv.Addr)
+		logrus.Printf("starting server on :%s", srv.Addr)
 		if err := srv.ListenAndServe(); err != nil {
-			log.Printf("stopped listening server: %v", err)
+			logrus.Printf("stopped listening server: %v", err)
 		}
 	}()
 }
 
 func gracefulShutdown(srv *http.Server, wg *sync.WaitGroup) {
-	log.Println("shutting down server...")
+	logrus.Println("shutting down server...")
 
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
 
 	if err := srv.Shutdown(shutdownCtx); err != nil {
-		log.Printf("error shutting down server: %v", err)
+		logrus.Errorf("error shutting down server: %v", err)
 	}
 
-	log.Println("waiting for background goroutines to finish...")
+	logrus.Println("waiting for background goroutines to finish...")
 	wg.Wait()
-	log.Println("server gracefully stopped")
+	logrus.Println("server gracefully stopped")
 }

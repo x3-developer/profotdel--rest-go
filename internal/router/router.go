@@ -14,6 +14,8 @@ func NewRouter(cfg *config.Config, container *container.Container) *chi.Mux {
 
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
+	r.Use(middleware.CORSMiddleware(cfg.CORS))
+	r.Use(middleware.APIMiddleware(cfg.AuthAppKey))
 
 	delivery.CategoryV1Routes(r, container)
 
