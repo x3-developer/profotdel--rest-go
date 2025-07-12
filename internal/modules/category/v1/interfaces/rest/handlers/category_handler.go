@@ -1,14 +1,14 @@
-package delivery
+package handlers
 
 import (
 	"fmt"
 	"net/http"
-	"profotdel-rest/internal/modules/category/v1/dto"
-	"profotdel-rest/internal/modules/category/v1/mapper"
-	"profotdel-rest/internal/modules/category/v1/usecase"
-	"profotdel-rest/pkg/request"
-	"profotdel-rest/pkg/response"
-	"profotdel-rest/pkg/validation"
+	"profotdel-rest/internal/modules/category/v1/application/dto"
+	"profotdel-rest/internal/modules/category/v1/application/mapper"
+	"profotdel-rest/internal/modules/category/v1/application/usecase"
+	"profotdel-rest/internal/shared/lib/request"
+	"profotdel-rest/internal/shared/lib/response"
+	"profotdel-rest/internal/shared/lib/validator"
 )
 
 type Handler interface {
@@ -37,7 +37,7 @@ func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	errFields := validation.ValidateDTO(createDTO)
+	errFields := validator.ValidateDTO(createDTO)
 	if errFields != nil {
 		msg := "validation errors occurred"
 		response.SendValidationError(w, http.StatusBadRequest, msg, response.BadRequest, errFields)

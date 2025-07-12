@@ -3,7 +3,7 @@ package middleware
 import (
 	"github.com/sirupsen/logrus"
 	"net/http"
-	"profotdel-rest/pkg/response"
+	"profotdel-rest/internal/shared/lib/response"
 	"runtime/debug"
 )
 

@@ -1,26 +1,26 @@
-package database
+package persistence
 
 import (
 	"fmt"
+	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"log"
 	"profotdel-rest/config"
 )
 
-type DB struct {
+type Postgres struct {
 	*gorm.DB
 }
 
-func NewDB(cfg *config.Config) *DB {
+func NewPostgres(cfg *config.Config) *Postgres {
 	dsn := GetDSN(cfg)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatalf("failed to connect to database: %v", err)
+		logrus.Fatalf("failed to connect to database: %v", err)
 	}
 
-	return &DB{db}
+	return &Postgres{db}
 }
 
 func GetDSN(cfg *config.Config) string {

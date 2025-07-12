@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"net/http"
-	"profotdel-rest/pkg/response"
+	"profotdel-rest/internal/shared/lib/response"
 )
 
 func APIMiddleware(authAppKey string) func(http.Handler) http.Handler {

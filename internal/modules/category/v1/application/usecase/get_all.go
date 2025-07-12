@@ -3,7 +3,6 @@ package usecase
 import (
 	"context"
 	"profotdel-rest/internal/modules/category/v1/domain"
-	"profotdel-rest/internal/modules/category/v1/repository"
 )
 
 type GetAllUseCase interface {
@@ -11,10 +10,10 @@ type GetAllUseCase interface {
 }
 
 type getAllUseCase struct {
-	repo repository.Repository
+	repo domain.Repository
 }
 
-func NewGetAllUseCase(repo repository.Repository) GetAllUseCase {
+func NewGetAllUseCase(repo domain.Repository) GetAllUseCase {
 	return &getAllUseCase{
 		repo: repo,
 	}

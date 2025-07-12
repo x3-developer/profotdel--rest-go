@@ -3,23 +3,14 @@ package repository
 import (
 	"context"
 	"profotdel-rest/internal/modules/category/v1/domain"
-	"profotdel-rest/pkg/database"
+	"profotdel-rest/internal/shared/infrastructure/persistence"
 )
 
-type Repository interface {
-	Create(ctx context.Context, model *domain.Category) (*domain.Category, error)
-	GetAll(ctx context.Context) ([]*domain.Category, error)
-	GetById(ctx context.Context, id uint) (*domain.Category, error)
-	Update(ctx context.Context, model *domain.Category) (*domain.Category, error)
-	Delete(ctx context.Context, id uint) error
-	GetByUniqueFields(ctx context.Context, name, slug string) (*domain.Category, error)
-}
-
 type repository struct {
-	DB *database.DB
+	DB *persistence.Postgres
 }
 
-func NewRepository(db *database.DB) Repository {
+func NewRepository(db *persistence.Postgres) domain.Repository {
 	return &repository{
 		DB: db,
 	}

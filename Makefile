@@ -1,12 +1,12 @@
 OUTPUT_DIR = bin/app
-MAIN = cmd/main.go
+API_MAIN = cmd/api/main.go
 .PHONY: all build clean run tidy
 
 all: build
 
 build:
 	@echo "Building the application..."
-	go build -o ${OUTPUT_DIR} $(MAIN)
+	go build -o ${OUTPUT_DIR} $(API_MAIN)
 
 run: build
 	@echo "Running the application..."

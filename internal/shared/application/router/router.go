@@ -4,9 +4,9 @@ import (
 	"github.com/go-chi/chi/v5"
 	"net/http"
 	"profotdel-rest/config"
-	"profotdel-rest/internal/container"
-	"profotdel-rest/internal/middleware"
-	"profotdel-rest/internal/modules/category/v1/delivery"
+	"profotdel-rest/internal/modules/category/v1/interfaces/rest"
+	"profotdel-rest/internal/shared/application/container"
+	"profotdel-rest/internal/shared/application/middleware"
 )
 
 func NewRouter(cfg *config.Config, container *container.Container) *chi.Mux {
@@ -17,7 +17,7 @@ func NewRouter(cfg *config.Config, container *container.Container) *chi.Mux {
 	r.Use(middleware.CORSMiddleware(cfg.CORS))
 	r.Use(middleware.APIMiddleware(cfg.AuthAppKey))
 
-	delivery.CategoryV1Routes(r, container)
+	rest.CategoryV1Routes(r, container)
 
 	r.Handle("/public/*", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
 

@@ -1,9 +1,9 @@
-package validation
+package validator
 
 import (
 	"errors"
 	"github.com/go-playground/validator/v10"
-	"profotdel-rest/pkg/response"
+	"profotdel-rest/internal/shared/lib/response"
 )
 
 func ValidateDTO(DTO interface{}) []response.ErrorField {

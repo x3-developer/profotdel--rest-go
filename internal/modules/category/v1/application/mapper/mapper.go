@@ -1,8 +1,8 @@
 package mapper
 
 import (
+	"profotdel-rest/internal/modules/category/v1/application/dto"
 	"profotdel-rest/internal/modules/category/v1/domain"
-	"profotdel-rest/internal/modules/category/v1/dto"
 )
 
 func ToResponseDTOFromModel(model *domain.Category) *dto.ResponseDTO {

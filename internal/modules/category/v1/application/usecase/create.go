@@ -3,8 +3,7 @@ package usecase
 import (
 	"context"
 	"profotdel-rest/internal/modules/category/v1/domain"
-	"profotdel-rest/internal/modules/category/v1/repository"
-	"profotdel-rest/pkg/response"
+	"profotdel-rest/internal/shared/lib/response"
 )
 
 type CreateUseCase interface {
@@ -12,10 +11,10 @@ type CreateUseCase interface {
 }
 
 type createUseCase struct {
-	repo repository.Repository
+	repo domain.Repository
 }
 
-func NewCreateUseCase(repo repository.Repository) CreateUseCase {
+func NewCreateUseCase(repo domain.Repository) CreateUseCase {
 	return &createUseCase{
 		repo: repo,
 	}
